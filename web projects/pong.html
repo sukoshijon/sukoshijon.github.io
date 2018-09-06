@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<title>Tennis for Two</title>
+	</head>
+	
+
+	<body style="background-color:#000000; color:#FFFFFF; font-family:'comic sans ms'">
+		<div>
+			<center>
+				<h1>tennis for two</h1>
+				<canvas id="cv" width="512" height="384">Your browser does not support HTML 5 Canvas</canvas>
+				<p>
+				you can't move at the same time, so don't
+				</p>
+				<p>
+				it's also kinda buggy so try not to get the ball stuck behind the paddle
+				</p>
+				<p>
+				also this took an hour js is way easier to work with
+				</p>
+			</center>
+		</div>
+	</body>
+	
+	<script>
+		var c = document.getElementById("cv");
+		var ctx = c.getContext("2d");
+		
+		var player1_score = 0;
+		var player2_score = 0;
+		
+		var paddle_y = 192;
+		var other_paddle_y = 192;
+		
+		var ball = [256, 192];
+		var ball_d = [1,1];
+		
+		document.addEventListener('keydown', function(event) {
+			if (ball_d[0] == -1) {
+			    if(event.keyCode == 87) {
+				paddle_y-=8;
+			    }
+			    else if(event.keyCode == 83) {
+				paddle_y+=8;
+			    }
+			} else {
+			    if(event.keyCode == 38) {
+				other_paddle_y-=8;
+			    }
+			    else if(event.keyCode == 40) {
+				other_paddle_y+=8;
+			    }
+			}
+		});
+		
+		function draw() {
+			ctx.clearRect(0,0,512,384);
+			ctx.fillStyle="#00FF00";
+			ctx.fillRect(4,paddle_y-48,32,96);
+			ctx.fillStyle="#0000FF";
+			ctx.fillRect(512-32-4,other_paddle_y-48,32,96);
+			ctx.fillStyle="#FFFFFF";
+			ctx.fillRect(ball[0]-6,ball[1]-6,12,12)
+			
+			//scores
+			ctx.font="20px Comic Sans MS";
+			ctx.fillText(player1_score,2,32);
+			ctx.fillText(player2_score,512-2-32,32);
+		}
+		
+		function main() {
+			draw();
+			// move ball
+			ball[0] += ball_d[0]/2;
+			ball[1] += ball_d[1]/2;
+			
+			// l/r wall collision+scoring
+			if (ball[0] >= 512-6) {
+				player1_score++;
+				ball_d[0] *= -1;
+			} else if (ball[0] <= 6) {
+				player2_score++;
+				ball_d[0] *= -1;
+			}
+			
+			// t/b wall collision
+			if (ball[1] >= 384-6 || ball[1] <= 6) {
+				ball_d[1] *= -1;
+			}
+			
+			// paddle collision
+			if ((ball[0] == 36+6 && ball[1] > paddle_y-48 && ball[1] < paddle_y+48) || (ball[0] == 512-36-6 && ball[1] > other_paddle_y-48 && ball[1] < other_paddle_y+48)) {
+				ball_d[0] *= -1;
+			}
+			
+			if (player1_score >= 10) {
+				draw(); //final draw call
+				ctx.font="32px Comic Sans MS";
+				ctx.fillText("player 1 wins",160,192);
+			} else if (player2_score >= 10) {
+				draw(); //final draw call
+				ctx.font="32px Comic Sans MS";
+				ctx.fillText("player 2 wins",160,192);
+			} else {
+				// loop
+				var u = setTimeout(main,1);
+			}
+		}
+		
+		main();
+	</script>
+</html>
+
