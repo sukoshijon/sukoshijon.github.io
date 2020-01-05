@@ -10,4 +10,10 @@ p {
 
 h1 {
 	color: lightgreen;
+	padding-left: 64px;
+	letter-spacing: 8px;
+}
+
+a {
+	text-decoration: none;
 }
