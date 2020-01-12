@@ -1,5 +1,5 @@
-* {
-	font-family: Comic Sans MS;
+body {
+	font-family: Arial, Helvetica, sans-serif;
 	background-color: black;
 }
 
@@ -7,24 +7,77 @@ p {
 	font-size: 20px;
 	color: white;
 	display: inline-block;
-	max-width: 40%;
+	max-width: 50%;
 	padding-left: 64px;
 	padding-top: 32px;
 }
 
+.albumdesc {
+	font-size: 14px;
+	color: white;
+	max-width: 50%;
+	padding-left: 64px;
+}
+
 h1 {
-	color: lightgreen;
+	color: white;
+	padding-top: 24px;
 	padding-left: 64px;
 	letter-spacing: 8px;
+	text-shadow: 2px 2px black;
+}
+
+h2 {
+	color: lightgreen;
+	padding-left: 16px;
 }
 
 a {
 	text-decoration: none;
 }
 
-.feed {
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.navbar {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+  
+li a:hover {
+	background-color: green;
+}
+
+.active {
+	background-color: teal;
+}
+
+.upper {
+	background-image: url("stars.jpg");
+	height: 96px;
+}
+
+iframe {
 	float: right;
-	border: 2px solid white;
-	padding-left: 64px;
-	width: 40%
+	padding-top: 32px;
+	padding-right: 12.5%;
 }
